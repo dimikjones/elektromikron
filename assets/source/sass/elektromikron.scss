@@ -23,6 +23,17 @@
 		}
 	}
 }
+
+#qodef-page-mobile-header {
+
+	.qodef-header-logo-link,
+	.qodef-mobile-header-logo-link {
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
 /* header logo end */
 
 
