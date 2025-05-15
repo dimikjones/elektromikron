@@ -8,6 +8,12 @@
 }
 /* boxed layout shadow end */
 
+/* header logo start */
+#qodef-page-header .qodef-header-logo-link:focus {
+	outline: none;
+}
+/* header logo end */
+
 /* header centered start */
 .qodef-header--centered #qodef-page-header-inner {
 	padding: 0;
@@ -399,14 +405,64 @@
 }
 /* floating contact actions end */
 
+/* back to top responsive adj. */
+@media screen and (max-width: 480px) {
+
+	#qodef-back-to-top {
+		width: 35px;
+		height: 35px;
+		right: 10px;
+		bottom: 10px;
+	}
+}
 
 /* CookieYes | GDPR Cookie Consent plugin styling adj. start */
 .cky-consent-container.cky-box-bottom-left {
 	bottom: 25px;
-	left: 25px;
+	left: 10px;
 }
 
 .cky-consent-container .cky-consent-bar {
 	border-radius: 0 !important;
+}
+
+.cky-btn-revisit-wrapper .cky-btn-revisit img {
+	display: none;
+}
+
+.cky-btn-revisit-wrapper .cky-btn-revisit {
+	color: #8BC746;
+}
+
+.cky-revisit-bottom-left:hover::before {
+	background: #003E34 !important;
+}
+
+.cky-revisit-bottom-left:hover::after {
+	border-right-color: #003E34 !important;
+}
+
+.cky-btn-revisit-wrapper .cky-btn-revisit:after {
+	content: "";
+	width: 30px;
+	height: 30px;
+	background-color: currentColor;
+	-webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTI1Ny41IDI3LjZjLS44LTUuNC00LjktOS44LTEwLjMtMTAuNmMtMjIuMS0zLjEtNDQuNiAuOS02NC40IDExLjRsLTc0IDM5LjVDODkuMSA3OC40IDczLjIgOTQuOSA2My40IDExNUwyNi43IDE5MC42Yy05LjggMjAuMS0xMyA0Mi45LTkuMSA2NC45bDE0LjUgODIuOGMzLjkgMjIuMSAxNC42IDQyLjMgMzAuNyA1Ny45bDYwLjMgNTguNGMxNi4xIDE1LjYgMzYuNiAyNS42IDU4LjcgMjguN2w4MyAxMS43YzIyLjEgMy4xIDQ0LjYtLjkgNjQuNC0xMS40bDc0LTM5LjVjMTkuNy0xMC41IDM1LjYtMjcgNDUuNC00Ny4ybDM2LjctNzUuNWM5LjgtMjAuMSAxMy00Mi45IDkuMS02NC45Yy0uOS01LjMtNS4zLTkuMy0xMC42LTEwLjFjLTUxLjUtOC4yLTkyLjgtNDcuMS0xMDQuNS05Ny40Yy0xLjgtNy42LTgtMTMuNC0xNS43LTE0LjZjLTU0LjYtOC43LTk3LjctNTItMTA2LjItMTA2Ljh6TTIwOCAxNDRhMzIgMzIgMCAxIDEgMCA2NCAzMiAzMiAwIDEgMSAwLTY0ek0xNDQgMzM2YTMyIDMyIDAgMSAxIDY0IDAgMzIgMzIgMCAxIDEgLTY0IDB6bTIyNC02NGEzMiAzMiAwIDEgMSAwIDY0IDMyIDMyIDAgMSAxIDAtNjR6Ii8+PC9zdmc+");
+	mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTI1Ny41IDI3LjZjLS44LTUuNC00LjktOS44LTEwLjMtMTAuNmMtMjIuMS0zLjEtNDQuNiAuOS02NC40IDExLjRsLTc0IDM5LjVDODkuMSA3OC40IDczLjIgOTQuOSA2My40IDExNUwyNi43IDE5MC42Yy05LjggMjAuMS0xMyA0Mi45LTkuMSA2NC45bDE0LjUgODIuOGMzLjkgMjIuMSAxNC42IDQyLjMgMzAuNyA1Ny45bDYwLjMgNTguNGMxNi4xIDE1LjYgMzYuNiAyNS42IDU4LjcgMjguN2w4MyAxMS43YzIyLjEgMy4xIDQ0LjYtLjkgNjQuNC0xMS40bDc0LTM5LjVjMTkuNy0xMC41IDM1LjYtMjcgNDUuNC00Ny4ybDM2LjctNzUuNWM5LjgtMjAuMSAxMy00Mi45IDkuMS02NC45Yy0uOS01LjMtNS4zLTkuMy0xMC42LTEwLjFjLTUxLjUtOC4yLTkyLjgtNDcuMS0xMDQuNS05Ny40Yy0xLjgtNy42LTgtMTMuNC0xNS43LTE0LjZjLTU0LjYtOC43LTk3LjctNTItMTA2LjItMTA2Ljh6TTIwOCAxNDRhMzIgMzIgMCAxIDEgMCA2NCAzMiAzMiAwIDEgMSAwLTY0ek0xNDQgMzM2YTMyIDMyIDAgMSAxIDY0IDAgMzIgMzIgMCAxIDEgLTY0IDB6bTIyNC02NGEzMiAzMiAwIDEgMSAwIDY0IDMyIDMyIDAgMSAxIDAtNjR6Ii8+PC9zdmc+");
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	mask-size: 30px;
+}
+
+.cky-btn-revisit-wrapper {
+	width: 30px !important;
+	height: 30px !important;
+}
+
+@media screen and (max-width: 480px) {
+	.cky-revisit-bottom-left {
+		bottom: 10px !important;
+		left: 10px !important;
+	}
 }
 /* CookieYes | GDPR Cookie Consent plugin styling adj. end */
