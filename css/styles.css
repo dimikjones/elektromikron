@@ -398,3 +398,15 @@
 	background-color: #7D3DAF;
 }
 /* floating contact actions end */
+
+
+/* CookieYes | GDPR Cookie Consent plugin styling adj. start */
+.cky-consent-container.cky-box-bottom-left {
+	bottom: 25px;
+	left: 25px;
+}
+
+.cky-consent-container .cky-consent-bar {
+	border-radius: 0 !important;
+}
+/* CookieYes | GDPR Cookie Consent plugin styling adj. end */
