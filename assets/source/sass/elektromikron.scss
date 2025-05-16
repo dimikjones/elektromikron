@@ -19,7 +19,7 @@
 	.qodef-header-logo-link {
 
 		&:focus {
-			outline: none;
+			outline: none !important;
 		}
 	}
 }
@@ -373,7 +373,7 @@
 			backface-visibility: hidden;
 		}
 
-		.qodef-image--hover-zoom .qodef-e:hover .qodef-e-product-title a,
+		&.qodef-image--hover-zoom .qodef-e:hover .qodef-e-product-title a,
 		.qodef-e-product-title a:hover {
 			background-size: 100% 100%;
 		}
@@ -383,7 +383,6 @@
 
 
 /* nav menu hover adj. start */
-/* old initial color #eaf3d3 */
 .qodef-header-navigation>ul>li>a:hover,
 .qodef-header-navigation>ul>li.current-menu-ancestor>a,
 .qodef-header-navigation>ul>li.current-menu-item>a {
@@ -410,6 +409,16 @@
 	background-size: 100% 100%;
 }
 /* nav menu hover adj. end */
+
+/* mobile header start */
+.qodef-mobile-header-navigation {
+	background: linear-gradient(180deg, #95c059 0%, #78a53b 100%);
+}
+
+.qodef-mobile-header-opener:focus {
+	outline: none !important;
+}
+/* mobile header end */
 
 
 /* pagination adj. start */
