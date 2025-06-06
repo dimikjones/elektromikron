@@ -28,7 +28,7 @@ if ( ! function_exists( 'qi_child_add_floating_contact_actions' ) ) {
 			$floating_contact_section = $page->add_section_element(
 				array(
 					'name'       => 'qodef_em_floating_contact_actions_section',
-					'title'      => esc_html__( 'Floating Contact Section', 'qode-essential-addons' ),
+					'title'      => esc_html__( 'Floating Contact Section', 'elektromikron' ),
 					'dependency' => array(
 						'show' => array(
 							'qodef_em_floating_contact_actions' => array(
