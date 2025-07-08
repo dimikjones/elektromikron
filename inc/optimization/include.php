@@ -53,6 +53,31 @@ if ( ! function_exists( 'elektromikron_control_heartbeat_settings' ) ) {
 }
 
 /**
+ * Deregister Dashicons stylesheet on the frontend for non-admin users.
+ *
+ * This function checks if the current request is on the frontend and if the
+ * current user does not have the 'manage_options' capability (typically admins).
+ * If both conditions are met, it deregisters the 'dashicons' stylesheet.
+ */
+if ( ! function_exists( 'elektromikron_deregister_dashicons_non_admin' ) ) {
+	function elektromikron_deregister_dashicons_non_admin() {
+		// Check if we are on the frontend.
+		// is_admin() returns true if in the admin area, false otherwise.
+		if ( ! is_admin() ) {
+			// Check if the current user does NOT have 'manage_options' capability.
+			// Users with 'manage_options' are typically administrators.
+			if ( ! current_user_can( 'manage_options' ) ) {
+				// Deregister the 'dashicons' stylesheet.
+				// This prevents it from being enqueued on the frontend for non-admin users.
+				wp_deregister_style( 'dashicons' );
+			}
+		}
+	}
+
+	add_action( 'wp_enqueue_scripts', 'elektromikron_deregister_dashicons_non_admin' );
+}
+
+/**
  * Disable all WordPress emoji scripts and styles.
  */
 if ( ! function_exists( 'elektromikron_disable_emojis' ) ) {
