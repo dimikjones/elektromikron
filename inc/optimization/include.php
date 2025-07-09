@@ -106,6 +106,74 @@ if ( ! function_exists( 'elektromikron_remove_version_query_strings' ) ) {
 }
 
 /**
+ * Adds Cache-Control, Expires, and Pragma headers for non-logged-in visitors
+ * on frontend GET requests to improve cacheability.
+ *
+ * This function is hooked into 'template_redirect', which fires before
+ * WordPress determines which template to load, allowing us to set headers
+ * based on user status and request method.
+ *
+ * @since 1.0.0
+ */
+if ( ! function_exists( 'elektromikron_add_cache_control_headers' ) ) {
+	function elektromikron_add_cache_control_headers() {
+		// 1. Apply only for non-logged-in users.
+		// is_user_logged_in() checks if the current user is logged in.
+		if ( is_user_logged_in() ) {
+			// Do not apply caching headers for logged-in users.
+			return;
+		}
+
+		// 2. Apply only for GET requests.
+		// POST requests and other methods often involve dynamic data submission
+		// and should generally not be cached.
+		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'GET' !== $_SERVER['REQUEST_METHOD'] ) {
+			return;
+		}
+
+		// 3. Apply only for public pages (frontend) and avoid specific non-cacheable pages.
+		// is_admin() checks if currently in the admin area.
+		// is_preview() checks if currently viewing a post/page preview.
+		// is_feed() checks if currently viewing an RSS/Atom feed.
+		// is_404() checks if currently viewing a 404 error page.
+		if ( is_admin() || is_preview() || is_feed() || is_404() ) {
+			return;
+		}
+
+		// 4. Respect existing 'DONOTCACHEPAGE' or 'DONOTCACHEOBJECT' constants.
+		// Many caching plugins define these constants to prevent caching for specific pages.
+		if ( ( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE ) || ( defined( 'DONOTCACHEOBJECT' ) && DONOTCACHEOBJECT ) ) {
+			return;
+		}
+
+		// If all checks pass, set the caching headers.
+
+		// Cache-Control Header:
+		// - 'public': Indicates that the response can be cached by any cache (browser, CDN, proxy).
+		// - 'max-age=3600': Tells the browser/cache that the resource is fresh for 3600 seconds (1 hour).
+		// After this time, the cached copy is considered stale.
+		// - 'must-revalidate': Instructs the cache to revalidate with the origin server
+		// before serving a stale copy. This ensures users get fresh content after max-age expires.
+		header( 'Cache-Control: public, max-age=3600, must-revalidate' );
+
+		// Expires Header:
+		// - This is an older HTTP/1.0 header, largely superseded by Cache-Control.
+		// - It specifies a date/time after which the response is considered stale.
+		// - Included for backward compatibility with older caching mechanisms.
+		// - Set to 1 hour from now, aligning with max-age.
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + 3600 ) . ' GMT' );
+
+		// Pragma Header:
+		// - This is another HTTP/1.0 header, primarily used for backward compatibility.
+		// - 'public' explicitly allows caching, reinforcing the Cache-Control: public intent.
+		// - 'no-cache' is more commonly used to prevent caching, so 'public' is used here.
+		header( 'Pragma: public' );
+	}
+
+	add_action( 'template_redirect', 'elektromikron_add_cache_control_headers' );
+}
+
+/**
  * Disable all WordPress emoji scripts and styles.
  */
 if ( ! function_exists( 'elektromikron_disable_emojis' ) ) {
