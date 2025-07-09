@@ -78,6 +78,34 @@ if ( ! function_exists( 'elektromikron_deregister_dashicons_non_admin' ) ) {
 }
 
 /**
+ * Removes version query strings (?ver=X.X) from static CSS and JavaScript file URLs.
+ *
+ * This function hooks into the 'script_loader_src' and 'style_loader_src' filters
+ * to modify the URL of enqueued scripts and stylesheets. By removing the 'ver'
+ * query parameter, it aims to improve cacheability.
+ *
+ * @param string $src The original URL of the script or stylesheet.
+ * @return string The modified URL with the 'ver' query string removed.
+ */
+if ( ! function_exists( 'elektromikron_remove_version_query_strings' ) ) {
+	function elektromikron_remove_version_query_strings( $src ) {
+		// Check if the 'ver' query argument exists in the URL.
+		// If it does, remove it using remove_query_arg().
+		if ( strpos( $src, 'ver=' ) ) {
+			$src = remove_query_arg( 'ver', $src );
+		}
+
+		return $src;
+	}
+
+	// Hook the function to the 'script_loader_src' filter for JavaScript files.
+	add_filter( 'script_loader_src', 'elektromikron_remove_version_query_strings', 15 );
+
+	// Hook the function to the 'style_loader_src' filter for CSS files.
+	add_filter( 'style_loader_src', 'elektromikron_remove_version_query_strings', 15 );
+}
+
+/**
  * Disable all WordPress emoji scripts and styles.
  */
 if ( ! function_exists( 'elektromikron_disable_emojis' ) ) {
