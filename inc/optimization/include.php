@@ -78,6 +78,46 @@ if ( ! function_exists( 'elektromikron_deregister_dashicons_non_admin' ) ) {
 }
 
 /**
+ * Defer JavaScript files loaded by wp_enqueue_script() in WordPress.
+ *
+ * This function adds the 'defer' attribute to all enqueued JavaScript files,
+ * with the exception of 'jquery', to improve page load performance.
+ *
+ * To use this, add the following to your theme's functions.php file or a custom plugin.
+ */
+if ( ! function_exists( 'elektromikron_defer_scripts' ) ) {
+	function elektromikron_defer_scripts( $tag, $handle, $src ) {
+		// Only apply on the frontend to avoid issues in the WordPress admin area.
+		if ( is_admin() ) {
+			return $tag;
+		}
+
+		// Exclude 'jquery' from deferral.
+		// Many WordPress themes and plugins rely on jQuery being available immediately
+		// or loaded synchronously before other scripts that depend on it.
+		if ( 'jquery' === $handle ) {
+			return $tag;
+		}
+
+		// Check if the 'defer' attribute is not already present.
+		// This prevents adding it multiple times if another plugin/theme already does.
+		if ( strpos( $tag, ' defer' ) === false ) {
+			// Add the 'defer' attribute to the script tag.
+			// The 'defer' attribute tells the browser to execute the script after the HTML document
+			// has been parsed, but before the `DOMContentLoaded` event.
+			// Scripts with 'defer' execute in the order they appear in the document.
+			$tag = str_replace( '<script', '<script defer', $tag );
+		}
+
+		return $tag;
+	}
+
+	// Hook into the 'script_loader_tag' filter.
+	// This filter allows modification of the HTML script tag before it's outputted.
+	add_filter( 'script_loader_tag', 'elektromikron_defer_scripts', 10, 3 );
+}
+
+/**
  * Removes version query strings (?ver=X.X) from static CSS and JavaScript file URLs.
  *
  * This function hooks into the 'script_loader_src' and 'style_loader_src' filters
