@@ -99,10 +99,10 @@ if ( ! function_exists( 'elektromikron_remove_version_query_strings' ) ) {
 	}
 
 	// Hook the function to the 'script_loader_src' filter for JavaScript files.
-	add_filter( 'script_loader_src', 'elektromikron_remove_version_query_strings', 15 );
+	//add_filter( 'script_loader_src', 'elektromikron_remove_version_query_strings', 15 );
 
 	// Hook the function to the 'style_loader_src' filter for CSS files.
-	add_filter( 'style_loader_src', 'elektromikron_remove_version_query_strings', 15 );
+	//add_filter( 'style_loader_src', 'elektromikron_remove_version_query_strings', 15 );
 }
 
 /**
