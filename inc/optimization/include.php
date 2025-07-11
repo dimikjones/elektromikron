@@ -106,6 +106,43 @@ if ( ! function_exists( 'elektromikron_remove_version_query_strings' ) ) {
 }
 
 /**
+ * Set efficient cache lifetimes for CSS and JS files in WordPress.
+ *
+ * This function modifies the version query argument for enqueued scripts and styles
+ * to use the file's last modification time. This ensures that browsers fetch new versions
+ * when the files are updated, while allowing for long cache lifetimes (e.g., far-future expires headers).
+ *
+ * To use this, add the following to your theme's functions.php file or a custom plugin.
+ */
+if ( ! function_exists( 'elektromikron_asset_cache_lifetime' ) ) {
+	function elektromikron_asset_cache_lifetime( $src, $handle ) {
+		// Get the full path to the asset file.
+		// Check if the source is a local file (not an external URL).
+		if ( strpos( $src, home_url() ) !== false && strpos( $src, '?' ) === false ) {
+			$file_path = str_replace( home_url(), ABSPATH, $src );
+
+			// Ensure the file exists before trying to get its modification time.
+			if ( file_exists( $file_path ) ) {
+				// Get the file's last modification time.
+				$mod_time = filemtime( $file_path );
+
+				// Append the modification time as the version query argument.
+				// This will force browsers to re-download the file only when it changes.
+				$src = add_query_arg( 'ver', $mod_time, $src );
+			}
+		}
+
+		return $src;
+	}
+
+	// Hook into 'script_loader_src' for JavaScript files.
+	add_filter( 'script_loader_src', 'elektromikron_asset_cache_lifetime', 10, 2 );
+
+	// Hook into 'style_loader_src' for CSS files.
+	add_filter( 'style_loader_src', 'elektromikron_asset_cache_lifetime', 10, 2 );
+}
+
+/**
  * Adds Cache-Control, Expires, and Pragma headers for non-logged-in visitors
  * on frontend GET requests to improve cacheability.
  *
