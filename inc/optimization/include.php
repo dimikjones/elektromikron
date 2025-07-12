@@ -334,3 +334,39 @@ if ( ! function_exists( 'elektromikron_disable_capital_p_dangit' ) ) {
 
 	add_action( 'init', 'elektromikron_disable_capital_p_dangit' );
 }
+
+if ( ! function_exists( 'elektromikron_offload_multiple_stylesheets' ) ) {
+	/**
+	 * Adds the rel='preload' to stylesheets and onload replace it with rel='stylesheet' in order to offload them.
+	 *
+	 * @param string $html The complete HTML <link> tag.
+	 * @param string $handle The stylesheet's registered handle.
+	 *
+	 * @return string The modified HTML <link> tag with 'defer' attribute, or original HTML.
+	 */
+	function elektromikron_offload_multiple_stylesheets( $html, $handle ) {
+		// Define an array of stylesheet handles that you want to offload.
+		// IMPORTANT: Replace these with the actual handles you used when enqueuing them.
+		$offload_handles = array(
+			'qi-style',
+			'elementor-icons',
+			'v4-shims',
+			'qi-addons-for-elementor-helper-parts-style',
+			'qi-addons-for-elementor-grid-style',
+			'qi-addons-for-elementor-style',
+			'brands-styles',
+		);
+
+		// Check if the current stylesheet's handle is in our list of offload handles.
+		if ( in_array( $handle, $offload_handles ) ) {
+			// If it is, add the 'defer' attribute to the link tag.
+			// return str_replace( "media='stylesheet'", "rel='preload' as='style'" . "onload=\"this.rel='stylesheet'\"", $html ).
+			return str_replace( "rel='stylesheet'", "rel=\"preload\" as=\"style\" onload=\"this.rel=&#39;stylesheet&#39;\"", $html );
+		}
+
+		// If the handle is not in our list, return the original HTML.
+		return $html;
+	}
+
+	add_filter( 'style_loader_tag', 'elektromikron_offload_multiple_stylesheets', 10, 2 );
+}
