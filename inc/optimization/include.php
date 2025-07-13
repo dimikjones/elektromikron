@@ -354,6 +354,7 @@ if ( ! function_exists( 'elektromikron_offload_multiple_stylesheets' ) ) {
 			'qi-style',
 			'swiper',
 			'elementor-icons',
+			'elementor-frontend',
 			'v4-shims',
 			'qi-addons-for-elementor-helper-parts-style',
 			'qi-addons-for-elementor-grid-style',
