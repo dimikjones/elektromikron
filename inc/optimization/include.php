@@ -342,7 +342,7 @@ if ( ! function_exists( 'elektromikron_offload_multiple_stylesheets' ) ) {
 	 * @param string $html The complete HTML <link> tag.
 	 * @param string $handle The stylesheet's registered handle.
 	 *
-	 * @return string The modified HTML <link> tag with 'defer' attribute, or original HTML.
+	 * @return string The modified HTML <link> tag with rel='preload' attribute, or original HTML.
 	 */
 	function elektromikron_offload_multiple_stylesheets( $html, $handle ) {
 		// Define an array of stylesheet handles that you want to offload.
