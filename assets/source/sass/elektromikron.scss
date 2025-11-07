@@ -450,7 +450,7 @@
 
 /* certificates sharpening */
 .em-certificates-sharp.qodef-qi-image-gallery.qodef-image--hover-zoom .qodef-e-inner img {
-	image-rendering: pixelated;
+	image-rendering: -webkit-optimize-contrast;
 }
 
 /* floating contact actions start */
