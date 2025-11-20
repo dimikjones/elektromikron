@@ -299,24 +299,8 @@ if ( ! function_exists( 'elektromikron_modify_speculation_rules' ) ) {
 		return $config;
 	}
 
-	//add_filter( 'wp_speculation_rules_configuration', 'elektromikron_modify_speculation_rules' );
+	add_filter( 'wp_speculation_rules_configuration', 'elektromikron_modify_speculation_rules' );
 }
-
-add_filter(
-	'wp_speculation_rules_href_exclude_paths',
-	function ( $href_exclude_paths, $mode ) {
-		if ( 'prerender' === $mode ) {
-			// Version without the trailing slash (your original).
-			$href_exclude_paths[] = '/pneumatski-uredjaji/ventil-upravljacki-komandna-slavina';
-
-			// Version WITH the trailing slash (NEW).
-			$href_exclude_paths[] = '/pneumatski-uredjaji/ventil-upravljacki-komandna-slavina/';
-		}
-		return $href_exclude_paths;
-	},
-	10,
-	2
-);
 
 /**
  * Limit WordPress post revisions to 5.
