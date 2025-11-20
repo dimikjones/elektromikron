@@ -299,7 +299,7 @@ if ( ! function_exists( 'elektromikron_modify_speculation_rules' ) ) {
 		return $config;
 	}
 
-	add_filter( 'wp_speculation_rules_configuration', 'elektromikron_modify_speculation_rules' );
+	//add_filter( 'wp_speculation_rules_configuration', 'elektromikron_modify_speculation_rules' );
 }
 
 add_filter(
