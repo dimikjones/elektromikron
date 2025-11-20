@@ -303,6 +303,30 @@ if ( ! function_exists( 'elektromikron_modify_speculation_rules' ) ) {
 }
 
 /**
+ * Forces a 302 redirect for the specific Variant B page to prevent 301 caching issues.
+ */
+function ab_test_force_302_redirect() {
+	// 1. Define the Post ID for your Variant B page (The one with the 301 issue)
+	$variant_b_post_id = 711; // <-- REPLACE with the actual Post ID of your Variant B page
+
+	// 2. Define the correct, canonical URL this page SHOULD redirect to (e.g., the URL itself)
+	$correct_url = '/pneumatski-uredjaji/ventil-automatski-uredjaja-za-crpv/';
+
+	// Check if we are currently viewing the Variant B page.
+	if ( is_singular() && get_the_ID() == $variant_b_post_id ) {
+		// Check if the current request URL doesn't match the correct URL (i.e., it's the 301 request)
+		// If the URL is accessed via an old/incorrect path, we issue a 302.
+
+		// Use wp_redirect with 302 status
+		// NOTE: This will only work if the 301 is not occurring too early (e.g., in .htaccess).
+		wp_redirect( home_url( $correct_url ), 302 );
+		exit;
+	}
+}
+// Run this before WordPress has finished processing headers.
+add_action( 'template_redirect', 'ab_test_force_302_redirect', 1 );
+
+/**
  * Limit WordPress post revisions to 5.
  *
  * This reduces unnecessary database storage while retaining useful revisions for editing.
