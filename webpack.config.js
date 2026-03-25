@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const config = {
 	entry: {
 		front: [
-			/*'./assets/source/js/elektromikron.js',*/
+			'./assets/source/js/elektromikron.js',
 			'./assets/source/sass/elektromikron.scss'
 		]
 	},

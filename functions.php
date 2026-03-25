@@ -18,7 +18,17 @@ if ( ! function_exists( 'elektromikron_enqueue_scripts' ) ) {
 		$theme_version = function_exists( 'wp_get_theme' ) ? wp_get_theme()->get( 'Version' ) : false;
 		$main_style    = 'qi-style';
 
+		// Enqueue CSS.
 		wp_enqueue_style( 'elektromikron-style', get_stylesheet_directory_uri() . '/assets/front.css', array( $main_style ), $theme_version );
+
+		// Enqueue JS.
+		wp_enqueue_script(
+			'elektromikron-script',
+			get_stylesheet_directory_uri() . '/assets/front.js',
+			array(),
+			$theme_version,
+			true
+		);
 	}
 
 	add_action( 'wp_enqueue_scripts', 'elektromikron_enqueue_scripts' );
